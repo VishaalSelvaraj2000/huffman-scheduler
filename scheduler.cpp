@@ -45,6 +45,11 @@ void Scheduler::sortProcesses() {
                 proc_arr[i] = proc_arr[i+1];
                 proc_arr[i+1] = temp;
                 sw = 0;
+            } else if((proc_arr[i].ar_time == proc_arr[i+1].ar_time) && (proc_arr[i].priority < proc_arr[i+1].priority)) {
+                proc_t temp = proc_arr[i];
+                proc_arr[i] = proc_arr[i+1];
+                proc_arr[i+1] = temp;
+                sw = 0;
             }
         }
         if(sw)
