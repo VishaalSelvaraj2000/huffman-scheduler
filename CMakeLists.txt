@@ -8,4 +8,4 @@ add_executable(scheduler
         scheduler.cpp
         fgk.h
         fgk.cpp
-        )
+        main.cpp)

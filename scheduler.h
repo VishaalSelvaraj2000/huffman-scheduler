@@ -21,7 +21,10 @@ struct proc_t {
 class Scheduler {
 private:
 	FGK::FGKTree tree;
-	
+	proc_t* proc_arr;
+	int nprocs;
+
+	void sortProcesses();
 public:
 	int max_q;
 
@@ -34,6 +37,6 @@ public:
 	int getDepth(int proc_id);
 	void loadProcesses(proc_t* procs, int n);
 	void placeInTree(proc_t proc);
-	void age(proc_t proc);
+	void run();
 	void setContextSwitchingTime(int time);
 };

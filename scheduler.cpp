@@ -21,42 +21,39 @@ int Scheduler::getDepth(int proc_id) {
 	return tree.getDepth(proc_id);
 }
 
-void Scheduler::age(proc_t proc) {
-	tree.update(proc.id);
-}
-
 void Scheduler::setContextSwitchingTime(int time) {
 	max_q = alpha * time;
 }
 
 void Scheduler::loadProcesses(proc_t *procs, int n) {
-	for (int i = 0; i < n; i++) {
-		placeInTree(procs[i]);
-	}
+    proc_arr = procs;
+	nprocs = n;
+}
+
+void Scheduler::sortProcesses() {
+    while(true) {
+        int sw = 1;
+        for(int i = 0; i < nprocs - 1; i++) {
+            if(proc_arr[i].ar_time > proc_arr[i+1].ar_time) {
+                proc_t temp = proc_arr[i];
+                proc_arr[i] = proc_arr[i+1];
+                proc_arr[i+1] = temp;
+                sw = 0;
+            }
+        }
+        if(sw)
+            break;
+    }
+}
+
+void Scheduler::run() {
+    //first we sort processes by arrival time
+    sortProcesses();
+    // now we start our performance-analysis
+    int time = 0;
 }
 
 
 
-int main()
-{
-	Scheduler sh(100);
-	proc_t p;
-	int arr[8];
-	
-	for (int i = 1; i < 7; i++) {
-		p.id = i;
-		p.priority = 1 + rand() * 10 / RAND_MAX;
-		arr[i] = p.priority;
-		sh.placeInTree(p);
-		
-	}
-	
-	for (int i = 1; i < 7; i++) {
-		
-		std::cout << "priority(" << arr[i] << ")" << " -> " << sh.getDepth(i) << std::endl;
-	}
-	
-	
-	return 0;
-}
+
 
