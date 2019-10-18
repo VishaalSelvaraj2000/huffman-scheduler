@@ -49,6 +49,7 @@ namespace FGK {
 		Node* getRootNode();
 		Node* getTreeFromSymbol(int symbol);
 		void encode(int symbol, bool** code, int* code_length);
+		void remove(int symbol);
 		int getDepth(int symbol);
 		void update(int symbol);
 	};

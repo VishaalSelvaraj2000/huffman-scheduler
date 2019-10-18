@@ -197,6 +197,11 @@ int FGKTree::getDepth(int symbol) {
 	return x;
 }
 
+void FGKTree::remove(int symbol) {
+    Node* node = getTreeFromSymbol(symbol);
+    node->value = 0;
+}
+
 FGKTree::FGKTree() {
 	//default-constructor
 }
