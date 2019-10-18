@@ -102,8 +102,10 @@ void Scheduler::run() {
             tree.remove(rrbuf[rri].id);
             rrbuf[rri].cpflag = 1;
             ncp++;
+            std::cout << rrbuf[rri].id << "->";
         } else {
             rrbuf[rri].burst_time -= qtm;
+            std::cout << rrbuf[rri].id << "->";
         }
         cv_burst += qtm;
         time += qtm + ctx_time;
