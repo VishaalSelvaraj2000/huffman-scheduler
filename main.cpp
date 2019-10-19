@@ -4,7 +4,7 @@
 int main()
 {
     Scheduler sh(100);
-    sh.alpha = 7; // context-switching loss: 12.5%
+    sh.alpha = 19; // context-switching loss: 5%
     sh.setContextSwitchingTime(1);
 
     int N = 0;

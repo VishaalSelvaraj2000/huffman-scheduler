@@ -98,7 +98,7 @@ void Scheduler::run() {
             qtm = rrbuf[rri].burst_time;
             rrbuf[rri].burst_time = 0;
 
-            perf_map[rrbuf[rri].id].comp_time = time > 0 ? time : qtm;
+            perf_map[rrbuf[rri].id].comp_time = time + qtm;
             tree.remove(rrbuf[rri].id);
             rrbuf[rri].cpflag = 1;
             ncp++;
