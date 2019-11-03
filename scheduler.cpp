@@ -72,11 +72,14 @@ void Scheduler::run() {
     int ncp = 0;
     int proc_index = 0;
     int rri = 0;
+    int total_priority = 0;
     while(cv_burst < total_burst) {
         for(int i = proc_index; i < nprocs; i++) {
             if(proc_arr[i].ar_time <= time) {
+                proc_arr[i].cpflag = 0;
                 rrbuf.push_back(proc_arr[i]);
                 placeInTree(proc_arr[i]);
+                total_priority += proc_arr[i].priority;
             } else {
                 proc_index = i;
                 break;
@@ -93,7 +96,8 @@ void Scheduler::run() {
             rri = (rri + 1) % rrbuf.size();
             continue;
         }
-        int qtm = getQuantum(rrbuf[rri].id);
+        // int qtm = getQuantum(rrbuf[rri].id);
+        int qtm = ((float)rrbuf[rri].priority / (float)total_priority) * max_q;
         if(qtm >= rrbuf[rri].burst_time) {
             qtm = rrbuf[rri].burst_time;
             rrbuf[rri].burst_time = 0;
